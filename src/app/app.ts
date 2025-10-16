@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { IUser } from './interfaces/User/user.interface';
 import { UsersList } from './data/users-list';
 
@@ -8,11 +8,19 @@ import { UsersList } from './data/users-list';
   standalone: false,
   styleUrl: './app.scss'
 })
-export class App {
-  protected readonly title = signal('User-Filter');
+export class App implements OnInit{
+  
+  usersList: IUser[] = [];
 
   userSelected: IUser = {} as IUser;
   showUserDetails: boolean = false ;
+
+  // Função provinda da interface OnInit que é acionado quando o componente carrega
+  ngOnInit(): void {
+    setTimeout(()=> {
+      this.usersList = UsersList;
+    }, 3000)
+  }
 
   onUserSelected(user: IUser) {
     this.userSelected = user;
