@@ -3,6 +3,7 @@ import { IUser } from './interfaces/User/user.interface';
 import { UsersList } from './data/users-list';
 import { IFilterOption } from './interfaces/filter-options.interface';
 import { isWithinInterval } from 'date-fns';
+import { filterUsersList } from './utils/filter-users-list';
 
 @Component({
   selector: 'app-root',
@@ -31,51 +32,6 @@ export class App implements OnInit{
   }
 
   onFilter(filter: IFilterOption) {
-    this.customUsersList = this.filterUsersList(filter, this.usersList);
-  }
-
-  filterUsersList(filter: IFilterOption, usersList: IUser[]): IUser[] {
-    let filteredList: IUser[] = [];
-
-    filteredList = this.filterUserListByName(filter.name, usersList);
-    filteredList = this.filterUserListByDate(filter.startDate, filter.endDate, filteredList);
-    filteredList = this.filterUserListByStatus(filter.status, filteredList);
-
-
-    return filteredList;
-  }
-
-  
-  filterUserListByStatus(status: boolean | undefined, usersList: IUser[]): IUser[] {
-    if(status === null || status === undefined) {
-      return usersList;
-    }
-
-    const customUsersList = usersList.filter((user) => user.ativo === status);
-    return customUsersList;
-  }
-
-  filterUserListByDate(startDate: Date | undefined, endDate: Date | undefined, usersList: IUser[]): IUser[] {
-    if(startDate === undefined || endDate === undefined) {
-      return usersList;
-    }
-
-    const listFiltered = usersList.filter((user) => isWithinInterval(new Date(user.dataCadastro), {
-      start: startDate,
-      end: endDate
-    }));
-
-    return listFiltered;
-  }
-
-  filterUserListByName(name: string | undefined, usersList: IUser[]): IUser[] {
-    const NAME_NOT_TYPPED = name === undefined;
-
-    if(NAME_NOT_TYPPED) {
-      return usersList
-    }
-
-    const filteredList = usersList.filter((user) => user.nome.toLowerCase().includes(name.toLowerCase()));
-    return filteredList;
+    this.customUsersList = filterUsersList(filter, this.usersList);
   }
 }
