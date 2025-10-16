@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { UserDetails } from './user-details/user-details';
 import { CommonModule } from '@angular/common';
 import { AngularMaterialModule } from '../angular-material/angular-material-module';
+import { UsersListComponent } from './users-list/users-list';
 
 
 
@@ -11,6 +12,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material-modu
   declarations: [
     UserDetails,
     Filter,
+    UsersListComponent,
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material-modu
   ], exports: [
     UserDetails,
     Filter,
+    UsersListComponent,
   ]
 })
 export class ComponentsModule { }
