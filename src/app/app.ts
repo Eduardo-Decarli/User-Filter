@@ -12,7 +12,7 @@ export class App {
   protected readonly title = signal('User-Filter');
 
   userSelected: IUser = {} as IUser;
-showUserDetails: boolean = false ;
+  showUserDetails: boolean = false ;
 
   onUserSelected(user: IUser) {
     this.userSelected = user;
