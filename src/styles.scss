@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use 'styles/utils/_text-align-center';
 
 html {
   @include mat.theme((
