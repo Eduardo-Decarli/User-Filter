@@ -11,6 +11,7 @@ import { IFilterOption } from './interfaces/filter-options.interface';
 })
 export class App implements OnInit{
   usersList: IUser[] = [];
+  customUsersList: IUser[] = [];
 
   userSelected: IUser = {} as IUser;
   showUserDetails: boolean = false ;
@@ -19,6 +20,7 @@ export class App implements OnInit{
   ngOnInit(): void {
     setTimeout(()=> {
       this.usersList = UsersList;
+      this.customUsersList = UsersList;
     }, 1000)
   }
 
@@ -28,7 +30,25 @@ export class App implements OnInit{
   }
 
   onFilter(filter: IFilterOption) {
-    
+    this.customUsersList = this.filterUsersList(filter, this.usersList);
   }
 
+  filterUsersList(filter: IFilterOption, usersList: IUser[]): IUser[] {
+    let filteredList: IUser[] = [];
+
+    filteredList = this.filterUserListByName(filter.name, usersList);
+
+    return filteredList;
+  }
+
+  filterUserListByName(name: string | undefined, usersList: IUser[]): IUser[] {
+    const NAME_NOT_TYPPED = name === undefined;
+
+    if(NAME_NOT_TYPPED) {
+      return usersList
+    }
+
+    const filteredList = usersList.filter((user) => user.nome.toLowerCase().includes(name.toLowerCase()));
+    return filteredList;
+  }
 }
