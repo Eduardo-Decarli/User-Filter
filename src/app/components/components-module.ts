@@ -5,6 +5,7 @@ import { UserDetails } from './user-details/user-details';
 import { CommonModule } from '@angular/common';
 import { AngularMaterialModule } from '../angular-material/angular-material-module';
 import { UsersListComponent } from './users-list/users-list';
+import { PipesModule } from '../pipes/pipes-module';
 
 
 
@@ -17,7 +18,8 @@ import { UsersListComponent } from './users-list/users-list';
   imports: [
     CommonModule,
     AngularMaterialModule,
-    FormsModule
+    FormsModule,
+    PipesModule
   ], exports: [
     UserDetails,
     Filter,
