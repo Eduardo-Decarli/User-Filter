@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { IFilterOption } from '../../interfaces/filter-options.interface';
 
 @Component({
@@ -22,7 +22,9 @@ export class Filter {
     { description: 'Inativo', value: false}
   ];
 
+  @Output('onFIlter') onFilterEmitt = new EventEmitter<IFilterOption>();
+
   onFilter() {
-    console.log(this.filterOptions)
+    this.onFilterEmitt.emit(this.filterOptions);
   }
 }
