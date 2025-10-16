@@ -37,8 +37,18 @@ export class App implements OnInit{
     let filteredList: IUser[] = [];
 
     filteredList = this.filterUserListByName(filter.name, usersList);
+    filteredList = this.filterUserListByStatus(filter.status, usersList);
 
     return filteredList;
+  }
+  
+  filterUserListByStatus(status: boolean | undefined, usersList: IUser[]): IUser[] {
+    if(status === null || status === undefined) {
+      return usersList;
+    }
+
+    const customUsersList = usersList.filter((user) => user.ativo === status);
+    return customUsersList;
   }
 
   filterUserListByName(name: string | undefined, usersList: IUser[]): IUser[] {
