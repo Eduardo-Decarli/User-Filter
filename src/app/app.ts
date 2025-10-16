@@ -11,6 +11,12 @@ import { UsersList } from './data/users-list';
 export class App {
   protected readonly title = signal('User-Filter');
 
-  userSelected: IUser = UsersList[0];
+  userSelected: IUser = {} as IUser;
+showUserDetails: boolean = false ;
+
+  onUserSelected(user: IUser) {
+    this.userSelected = user;
+    this.showUserDetails = true;
+  }
 
 }

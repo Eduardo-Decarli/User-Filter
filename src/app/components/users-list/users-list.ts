@@ -14,8 +14,12 @@ export class UsersListComponent {
   usersList: IUser[] = UsersList;
   userSelected = {} as IUser;
 
+  @Output('userSelected') userSelectedEmitt = new EventEmitter<IUser>();
+
   onUserSelected(user: IUser) {
     console.log('user', user);
+
+    this.userSelectedEmitt.emit(user);
   }
 
 
